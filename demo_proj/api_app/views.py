@@ -6,7 +6,10 @@ from .serializer import UserSerializer
 
 @api_view(['GET'])
 def get_users(request):
-    return Response(UserSerializer({'name':'venky','city':'Tor'}))
+    users=User.objects.all()
+    serializer=UserSerializer(users,many=True)
+    return Response(serializer.data)
+    # return Response(UserSerializer({'name':'venky','city':'Tor'}))
 
 @api_view(['POST'])
 def create_user(request):
